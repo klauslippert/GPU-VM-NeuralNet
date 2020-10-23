@@ -10,6 +10,9 @@ chmod u+x Anaconda3.sh
 ~/anaconda3/bin/conda init
 source ~/.bashrc
 
+conda create --name tensorflow1-cpu python=3 -y
+conda activate tensorflow1-cpu
+conda install tensorflow==1.15 -y
 
 conda create --name tensorflow2-cpu  python=3 -y
 conda activate tensorflow2-cpu
@@ -17,7 +20,6 @@ conda install tensorflow -y
 
 conda create --name pytorch-cpu python=3 -y
 conda activate pytorch-cpu
-conda install pytorch-cpu torchvision-cpu -c pytorch -y
-
+conda install pytorch torchvision cpuonly -c pytorch -y
 
 
