@@ -4,14 +4,19 @@ Installation Scripts for setting up pytorch and tensorflow
 
 anaconda3 with environments:
 
+-  base
+   -  python >= 3.8.3
 -  tensorflow1-cpu
-    -  tensorflow==1.15
+    -  python == 3.7.9
+    -  tensorflow == 1.15.0
 -  tensorflow2-cpu
-    -  tensorflow>=2 (2.2 at 2020-10-23)
+    -  python >= 3.8.5
+    -  tensorflow >= 2.2.0
 -  pytorch-cpu
-    -  
-
-### up to come ### 
+    - python >= 3.8.5
+    - pytorch >= 1.6.0
+    
+### up to come ### torch.
 -  tensorflow1-gpu
 -  tensorflow2-gpu
 -  pytorch-gpu
