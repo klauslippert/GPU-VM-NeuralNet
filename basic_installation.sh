@@ -11,7 +11,6 @@
 #chmod u+x Anaconda3.sh
 #./Anaconda3.sh -b -p $HOME/anaconda3
 #~/anaconda3/bin/conda init bash
-#source ~/.bashrc
 
 ######################################
 # this has to go to a seperate script:
@@ -43,8 +42,26 @@
 # this has to go to a seperate script:
 # jupyter notebook
 ######################################
+source ~/anaconda3/etc/profile.d/conda.sh
+
 
 # let you change the kernels in jupyter notebook
+#conda install -n tensorflow1-cpu jupyter -y
+#source activate tensorflow1-cpu
+#python -m ipykernel install --name tensorflow1-cpu --user
+#################
+#conda install -n tensorflow2-cpu jupyter -y
+#source activate tensorflow2-cpu
+#python -m ipykernel install --name tensorflow2-cpu --user
+#################
+#conda install -n pytorch-cpu jupyter -y
+#conda activate pytorch-cpu
+#python -m ipykernel install --name pytorch-cpu --user
+#################
+
+
+
+
 
 # ??? # make the jupyter notebook accessable from outside
 
