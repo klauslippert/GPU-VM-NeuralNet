@@ -1,5 +1,13 @@
 # my gitignore
 Anaconda3.sh
+tests/data/*
+tests/*.py
+tests/*.screenout
+tests/tests_time.txt
+tests/wget-log
+*.ipynb
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
