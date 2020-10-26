@@ -2,6 +2,7 @@
 
 ########################################################################################
 
+
 function install_anaconda {
 
 	echo " "
@@ -188,6 +189,8 @@ function run_extended_tests {
 	echo `date`
 	echo " "
 
+        source ~/anaconda3/etc/profile.d/conda.sh
+
 	echo " " > tests_time.txt
 
 	echo "##### PYTORCH"
@@ -195,14 +198,14 @@ function run_extended_tests {
 	sed -i 's#../data#./data#g' pytorch.py		# adopt the data folder
 	# CPU
 	conda activate CPU__pytorch
-	echo "pytorch CPU start   " `date` >> tests_time.txt
+	echo "pytorch CPU start     " `date` >> tests_time.txt
 	python pytorch.py --epochs 3 > pytorch_CPU.screenout
-	echo "pytorch CPU stop    " `date` >> tests_time.txt
+	echo "pytorch CPU stop      " `date` >> tests_time.txt
 	# GPU
         conda activate GPU__pytorch
-	echo "pytorch GPU start   " `date` >> tests_time.txt
+	echo "pytorch GPU start     " `date` >> tests_time.txt
 	python pytorch.py --epochs 3 > pytorch_GPU.screenout
-	echo "pytorch GPU stop    " `date` >> tests_time.txt
+	echo "pytorch GPU stop      " `date` >> tests_time.txt
 
 
 
@@ -210,32 +213,36 @@ function run_extended_tests {
 	echo "##### TENSORFLOW 1"
 	wget https://raw.githubusercontent.com/aymericdamien/TensorFlow-Examples/master/tensorflow_v1/examples/3_NeuralNetworks/neural_network.py -O tensorflow1.py
 	sed -i 's#/tmp/data#./data#g' tensorflow1.py
-	sed -i 's#num_steps = 1000#num_steps = 100000#g' tensorflow1.py
+	sed -i 's#num_steps = 1000#num_steps = 70000#g' tensorflow1.py
 
         # CPU
 	conda activate CPU__tensorflow1
-	echo "tensorflow1 CPU start" `date` >> tests_time.txt
+	echo "tensorflow1 CPU start " `date` >> tests_time.txt
 	python tensorflow1.py > tensorflow1_CPU.screenout
-	echo "tensorflow1 CPU stop " `date` >> tests_time.txt
+	echo "tensorflow1 CPU stop  " `date` >> tests_time.txt
 	# GPU
 	conda activate GPU__tensorflow1
 	echo "tensorflow1 GPU start " `date` >> tests_time.txt
 	python tensorflow1.py > tensorflow1_GPU.screenout
-	echo "tensorflow1 GPU stop " `date` >> tests_time.txt
+	echo "tensorflow1 GPU stop  " `date` >> tests_time.txt
 
 	echo "##### TENSORFLOW 2"
-	#wget
-	#sed
+        wget https://raw.githubusercontent.com/aymericdamien/TensorFlow-Examples/master/tensorflow_v2/notebooks/3_NeuralNetworks/neural_network.ipynb -O tensorflow2.ipynb
+        jupyter nbconvert --to python tensorflow2.ipynb
+        sed -i 's/import matplotlib/#import matplotlib/g' tensorflow2.py
+        sed -i 's/plt./#plt./g' tensorflow2.py
+        sed -i 's/training_steps = 2000/training_steps=70000/g' tensorflow2.py
+
 	# CPU
-	#conda activate CPU__tensorflow2
-	echo "tensorflow2 CPU start" `date` >> tests_time.txt
-	#python tensorflow2.py > tensorflow2_CPU.screenout
-	echo "tensorflow2 CPU stop " `date` >> tests_time.txt
+	conda activate CPU__tensorflow2
+	echo "tensorflow2 CPU start " `date` >> tests_time.txt
+	python tensorflow2.py > tensorflow2_CPU.screenout
+	echo "tensorflow2 CPU stop  " `date` >> tests_time.txt
 	# GPU
-	#conda activate GPU__tensorflow2
-	echo "tensorflow2 GPU stop " `date` >> tests_time.txt
-	#python tensorflow2.py > tensorflow2_GPU.screenout
-	echo "tensorflow2 GPU stop " `date` >> tests_time.txt
+	conda activate GPU__tensorflow2
+	echo "tensorflow2 GPU start " `date` >> tests_time.txt
+	python tensorflow2.py > tensorflow2_GPU.screenout
+	echo "tensorflow2 GPU stop  " `date` >> tests_time.txt
 
 	echo " "
 	echo `date` "done"
@@ -253,13 +260,13 @@ function run_extended_tests {
 # requirement: GIT
 
 
-#install_anaconda
-#create_environments
-#install_libraries
-#install_jupyter      # optional
+install_anaconda
+create_environments
+install_libraries
+install_jupyter      # optional
 
-#run_small_tests
-run_extended_tests
+run_small_tests
+run_extended_tests    #optional
 
 
 # the extended tests are not really comparable
