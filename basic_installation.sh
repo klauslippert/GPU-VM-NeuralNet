@@ -3,7 +3,7 @@
 ########################################################################################
 
 function install_anaconda {
-	
+
 	echo " "
 	echo "#####################################"
 	echo "  Install Anaconda Python 3"
@@ -24,7 +24,7 @@ function install_anaconda {
 ########################################################################################
 
 function create_environments {
-	
+
 	echo " "
 	echo "#####################################"
 	echo "  Install Python environments"
@@ -54,7 +54,7 @@ function create_environments {
 ########################################################################################
 
 function install_libraries {
-	
+
 	echo " "
 	echo "#####################################"
 	echo "  Install libraries for Neural Nets"
@@ -80,7 +80,7 @@ function install_libraries {
 ########################################################################################
 
 function install_jupyter {
-	
+
 	echo " "
 	echo "#####################################"
 	echo "  Install jupyter notebook"
@@ -185,15 +185,15 @@ function run_extended_tests {
 	echo "    handwritting digit recognition "
 	echo "    with MNIST dataset"
 	echo "#####################################"
-	echo `date` 
+	echo `date`
 	echo " "
 
 	echo " " > tests_time.txt
 
 	echo "##### PYTORCH"
-	wget https://raw.githubusercontent.com/pytorch/examples/master/mnist/main.py -O pytorch.py	
+	wget https://raw.githubusercontent.com/pytorch/examples/master/mnist/main.py -O pytorch.py
 	sed -i 's#../data#./data#g' pytorch.py		# adopt the data folder
-	# CPU	
+	# CPU
 	conda activate CPU__pytorch
 	echo "pytorch CPU start   " `date` >> tests_time.txt
 	python pytorch.py --epochs 3 > pytorch_CPU.screenout
@@ -208,18 +208,19 @@ function run_extended_tests {
 
 
 	echo "##### TENSORFLOW 1"
-	#wget https://raw.githubusercontent.com/aymericdamien/TensorFlow-Examples/master/tensorflow_v1/examples/3_NeuralNetworks/neural_network.py -O tensorflow1.py
-	#sed -i 's#/tmp/data#./data#g' tensorflow1.py	# CPU
-	#sed -i 's#num_epochs=None#num_epochs=3#g' tensorflow1.py
+	wget https://raw.githubusercontent.com/aymericdamien/TensorFlow-Examples/master/tensorflow_v1/examples/3_NeuralNetworks/neural_network.py -O tensorflow1.py
+	sed -i 's#/tmp/data#./data#g' tensorflow1.py
+	sed -i 's#num_steps = 1000#num_steps = 100000#g' tensorflow1.py
 
-	#conda activate CPU__tensorflow1
-	echo "tensorflow1 CPU start" `date`  > tests_time.txt
-	#python tensorflow1.py > tensorflow1_CPU.screenout
+        # CPU
+	conda activate CPU__tensorflow1
+	echo "tensorflow1 CPU start" `date` >> tests_time.txt
+	python tensorflow1.py > tensorflow1_CPU.screenout
 	echo "tensorflow1 CPU stop " `date` >> tests_time.txt
 	# GPU
-	#conda activate GPU__tensorflow1
-	echo "tensorflow1 GPU stop " `date` >> tests_time.txt
-	#python tensorflow1.py > tensorflow1_GPU.screenout
+	conda activate GPU__tensorflow1
+	echo "tensorflow1 GPU start " `date` >> tests_time.txt
+	python tensorflow1.py > tensorflow1_GPU.screenout
 	echo "tensorflow1 GPU stop " `date` >> tests_time.txt
 
 	echo "##### TENSORFLOW 2"
@@ -227,7 +228,7 @@ function run_extended_tests {
 	#sed
 	# CPU
 	#conda activate CPU__tensorflow2
-	echo "tensorflow2 CPU start" `date`  > tests_time.txt
+	echo "tensorflow2 CPU start" `date` >> tests_time.txt
 	#python tensorflow2.py > tensorflow2_CPU.screenout
 	echo "tensorflow2 CPU stop " `date` >> tests_time.txt
 	# GPU
@@ -252,12 +253,21 @@ function run_extended_tests {
 # requirement: GIT
 
 
-#install_anaconda     
-#create_environments  
-#install_libraries    
+#install_anaconda
+#create_environments
+#install_libraries
 #install_jupyter      # optional
-run_small_tests      
+
+#run_small_tests
 run_extended_tests
+
+
+# the extended tests are not really comparable
+# 2do: - wget: point to a specific commit for each example
+#      - check the data size in each test
+#      - adjust the number of epochs / steps to each other
+#      - tensorflow1 gpu is only a little bit faster then CPU.. why?
+
 
 
 

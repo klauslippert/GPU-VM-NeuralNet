@@ -7,6 +7,10 @@ tests/tests_time.txt
 tests/wget-log
 *.ipynb
 tmp_*
+tensorflow1*
+pytorch*
+data/*
+tests_time.txt
 
 
 # Byte-compiled / optimized / DLL files
