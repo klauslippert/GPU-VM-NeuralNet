@@ -6,7 +6,7 @@ tests/*.screenout
 tests/tests_time.txt
 tests/wget-log
 *.ipynb
-
+tmp_*
 
 
 # Byte-compiled / optimized / DLL files
