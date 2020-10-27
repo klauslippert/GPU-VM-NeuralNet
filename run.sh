@@ -33,6 +33,8 @@ function create_environments {
 	echo `date`
 	echo " "
 
+        source ~/anaconda3/etc/profile.d/conda.sh
+
 	# for CPU
 	conda create -n CPU__tensorflow1 python=3 -y
 	conda create -n CPU__tensorflow2  python=3 -y
@@ -63,6 +65,8 @@ function install_libraries {
 	echo `date`
 	echo " "
 
+        source ~/anaconda3/etc/profile.d/conda.sh
+
 	# for CPU
 	conda install -n CPU__tensorflow1 tensorflow==1.15 -y
 	conda install -n CPU__tensorflow2 tensorflow -y
@@ -89,6 +93,8 @@ function install_jupyter {
 	echo "#####################################"
 	echo `date`
 	echo " "
+
+        source ~/anaconda3/etc/profile.d/conda.sh
 
 	# jupyter notebook in all env
 	conda install -n CPU__tensorflow1 jupyter -y
