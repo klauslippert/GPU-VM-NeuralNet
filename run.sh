@@ -267,11 +267,15 @@ function run_extended_tests {
 
 
 install_anaconda
+#
 create_environments
+#
 install_libraries
+#
 install_jupyter      # optional
-
+#
 run_small_tests
+#
 run_extended_tests    #optional
 
 
